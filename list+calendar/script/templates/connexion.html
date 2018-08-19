@@ -1,0 +1,29 @@
+<!DOCTYPE <html>
+<html>
+<head>
+  <title> Connexion Agenda </title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/foundation.css') }}">
+  <link rel="stylesheet" href="{{ url_for ('static', filename='css/app.css') }}">
+  <link rel="stylesheet" href="{{ url_for ('static', filename='css/connexion.css') }}">
+</head>
+
+<body>
+<form class ="callout text-center" action="/login" method="post">
+  <h2> Connexion au tableau</h2>
+  <div class="floated-label-wrapper">
+    <label for="username">Username</label>
+    <input type="text" id="username" name="username" placeholder="Your username">
+  </div>
+
+<div class ="floated-label-wrapper">
+  <label for="password">Password</label>
+  <input type="password" id="password" name="password" placeholder="Password">
+</div>
+<input class="button expanded" type="submit" value="Connexion">
+</form>
+
+<script src="{{ url_for ('static', filename='js/jquery.js') }}"></script>
+<script src="{{ url_for ('static', filename='js/connexion.js') }}"></script>
+
+</body>
+</html>

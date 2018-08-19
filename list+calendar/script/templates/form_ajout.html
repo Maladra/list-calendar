@@ -1,0 +1,48 @@
+<html class="no-js" lang="en" dir="ltr">
+  <head>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foundation for Sites</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/foundation.css') }}">
+    <link rel="stylesheet" href="{{ url_for ('static', filename='css/app.css') }}">
+    <link rel="stylesheet" href="{{ url_for ('static', filename='css/form_ajout.css') }}">
+  </head>
+
+<body>
+  <form action="/db_add" method="post">
+    <div class="row">
+      <div class="small-12 column">
+        <div class="form-floating-label">
+          <input type="date" id="date" name="date" required>
+          <label for="date">date</label>
+        </div>
+      </div>
+      <div class="small-12 column">
+        <div class="form-floating-label">
+          <input type="text" id="description" name="description">
+          <label for="description">Description</label>
+        </div>
+      </div>
+      <div class="small-12 column">
+        <div class="form-floating-label">
+          <input type="text" id="statut" name="statut">
+          <label for="statut">statut</label>
+        </div>
+      </div>
+      <div class="small-12 column">
+        <div class="form-floating-label">
+          <textarea name="texte" id="texte" rows="5" placeholder=""></textarea>
+          <label for="textarea">Texte</label>
+        </div>
+      </div>
+    </div>
+<input class="button expanded" type="submit" value="Connexion">
+  </form>
+
+
+<script src="{{ url_for ('static', filename='js/jquery.js') }}"></script>
+<script src="{{ url_for ('static', filename='js/ajout_form.js') }}"></script>
+
+</body>
+</html>
