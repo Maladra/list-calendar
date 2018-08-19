@@ -1,0 +1,1 @@
+just pip3 install flask and pip3 install uwsgi
