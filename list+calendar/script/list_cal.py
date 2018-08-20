@@ -82,8 +82,16 @@ def db_add():
 
 @agenda.route('/db_remove')
 def db_remove():
-#TODO requete remove + FLASH
-    return ("blabla")
+    conn = sqlite3.connect('tableau.db')
+    cursor = conn.cursor()
+    mon_id=request.form['mon_id']
+    cursor.execute("""
+    DELETE FROM donnees WHERE id=?""",(mon_id,))
+    conn.commit()
+    conn.close()
+    #TODO requete remove + FLASH
+
+    return redirect(url_for('tab'))
 
 @agenda.route('/logout')
 def logout():

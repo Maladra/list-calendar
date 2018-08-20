@@ -11,6 +11,10 @@
 
 
 <body>
+  <a href="/form_ajout">
+    <input type="button" value="add entrée"/>
+  </a>
+
 <table class="table-expand">
   <thead>
     <tr class="table-expand-row">
@@ -19,14 +23,13 @@
       <th width="150">Status</th>
     </tr>
   </thead>
-  <tbody>
-
-    {% for row in rows %}
+    <tbody>
+   {% for row in rows %}
         <tr class="table-expand-row" data-open-details>
         <td>{{row["date_modif"]}}</td>
         <td> {{row["description"]}}</td>
         <td> {{row["statut"]}} <span class="expand-icon"></span></td>
-        <td> <button type="button" onclick="alert({{row["id"]}})">{{row["id"]}}</button>
+        <td> <button type="button" onclick="alert({{row["id"]}})">{{row["id"]}}</button></td>
         </tr>
 
           <tr class="table-expand-row-content">
