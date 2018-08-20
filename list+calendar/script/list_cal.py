@@ -26,7 +26,7 @@ conn.close() #fermeture de la connexion a la db
 
 agenda = Flask(__name__)
 
-agenda.secret_key = b'ti4Y(c.\x0f\xcf}\xf3\xc4\xc5\t\xa3\xa9'
+agenda.secret_key = #Your_Secret_Key
 
 
 @agenda.route("/")
