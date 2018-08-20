@@ -1,7 +1,15 @@
 from flask import Flask, session, flash, g, redirect, url_for, escape, request, render_template, jsonify
 import sqlite3
+import configparser
 
-conn = sqlite3.connect('tableau.db') #connexion a la DB
+config =configparser.ConfigParser()
+config.read('conf.ini')
+secret_key=config.get('CONFIG','secret_key')
+database=config.get('CONFIG','database')
+your_username=config.get('ACCOUNT','my_username')
+
+
+conn = sqlite3.connect(database) #connexion a la DB
 cursor = conn.cursor() # definition cursor
 
 #creation de la table
@@ -26,7 +34,7 @@ conn.close() #fermeture de la connexion a la db
 
 agenda = Flask(__name__)
 
-agenda.secret_key = #Your_Secret_Key
+agenda.secret_key = secret_key
 
 
 @agenda.route("/")
