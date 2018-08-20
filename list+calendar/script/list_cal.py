@@ -42,7 +42,7 @@ def connexion():
 @agenda.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        if request.form['username'] == "admin":
+        if request.form['username'] == your_username:
             session['username'] = request.form['username']
             return redirect(url_for('tab'))
     return redirect(url_for('connexion'))
