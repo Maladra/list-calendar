@@ -23,15 +23,15 @@
       <th width="150">Status</th>
     </tr>
   </thead>
+<form action="/edit" method="post">
     <tbody>
    {% for row in rows %}
         <tr class="table-expand-row" data-open-details>
         <td>{{row["date_modif"]}}</td>
         <td> {{row["description"]}}</td>
         <td> {{row["statut"]}} <span class="expand-icon"></span></td>
-        <td> <button type="button" onclick="alert({{row["id"]}})">{{row["id"]}}</button></td>
+        <td> <button name="edit" type="submit" value="{{row["id"]}}">EDIT</button></td>
         </tr>
-
           <tr class="table-expand-row-content">
             <td colspan="8" class="table-expand-row-nested">
               <p> {{row["texte"]}} </p>
@@ -39,22 +39,8 @@
           </tr>
     {% endfor %}
 
-
-    <tr class="table-expand-row" data-open-details>
-      <td>August 15</td>
-      <td>Je suis une Description</td>
-      <td>Je suis un statut <span class="expand-icon"></span></td>
-      <td> <button type="button" onclick="alert('Hello world!')">Click Me!</button> </td>
-    </tr>
-
-    <tr class="table-expand-row-content">
-      <td colspan="8" class="table-expand-row-nested">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque unde quaerat reprehenderit ipsa ipsam, adipisci facere repellendus impedit at, quisquam dicta optio veniam quia nesciunt, inventore quod in neque magni?</p>
-      </td>
-    </tr>
-
-
   </tbody>
+</form>
 </table>
 
 <script src="{{ url_for ('static', filename='js/jquery.js') }}"></script>

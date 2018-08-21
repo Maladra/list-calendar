@@ -59,7 +59,7 @@ def login():
 @agenda.route('/tab')
 def tab():
     if 'username' in session:
-        conn = sqlite3.connect('tableau.db')
+        conn = sqlite3.connect(database)
         conn.row_factory = sqlite3.Row
         cursor = conn.cursor()
         cursor.execute("""select * from donnees""")
@@ -72,6 +72,18 @@ def tab():
 def form_ajout():
     return render_template("form_ajout.html")
 
+@agenda.route('/edit', methods=['POST'])
+def edit():
+    ma_val=request.form['edit']
+    conn = sqlite3.connect(database)
+    conn.row_factory = sqlite3.Row
+    cursor = conn.cursor()
+    cursor.execute("""SELECT * FROM donnees WHERE id=? """,(ma_val,))
+    rows=cursor.fetchone()
+    print (rows['date_modif'])
+    conn.close()
+    return render_template('form_edit.html',rows=rows)#render_template("form_edit.html")
+
 
 @agenda.route('/db_add', methods=['post'])
 def db_add():
@@ -79,7 +91,7 @@ def db_add():
     description=request.form['description']
     statut=request.form['statut']
     texte=request.form['texte']
-    conn = sqlite3.connect('tableau.db')
+    conn = sqlite3.connect(database)
     cursor = conn.cursor()
     cursor.execute("""
     INSERT INTO donnees (date_modif,description,statut,texte) VALUES(?,?,?,?)""",(date,description,statut,texte))
@@ -90,7 +102,7 @@ def db_add():
 
 @agenda.route('/db_remove')
 def db_remove():
-    conn = sqlite3.connect('tableau.db')
+    conn = sqlite3.connect(database)
     cursor = conn.cursor()
     mon_id=request.form['mon_id']
     cursor.execute("""

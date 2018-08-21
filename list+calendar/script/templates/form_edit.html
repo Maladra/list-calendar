@@ -7,7 +7,7 @@
   <title>Foundation for Sites</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/foundation.css') }}">
   <link rel="stylesheet" href="{{ url_for ('static', filename='css/app.css') }}">
-  <link rel="stylesheet" href="{{ url_for ('static', filename='css/form_ajout.css') }}">
+  <link rel="stylesheet" href="{{ url_for ('static', filename='css/form_edit.css') }}">
 </head>
 
 <body>
@@ -15,7 +15,7 @@
     <div class="row">
       <div class="small-12 column">
         <div class="form-floating-label">
-          <input type="date" id="date" name="date" required>
+          <input type="date" id="date" name="date" value="{{rows['date_modif']}}" required>
           <label for="date">date</label>
         </div>
       </div>
