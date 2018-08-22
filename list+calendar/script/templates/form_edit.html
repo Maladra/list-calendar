@@ -11,7 +11,7 @@
 </head>
 
 <body>
-  <form action="/db_add" method="post">
+  <form action="/db_edit" method="post">
     <div class="row">
       <div class="small-12 column">
         <div class="form-floating-label">
@@ -21,25 +21,26 @@
       </div>
       <div class="small-12 column">
         <div class="form-floating-label">
-          <input type="text" id="description" name="description">
+          <input type="text" id="description" name="description" value="{{rows['description']}}">
           <label for="description">Description</label>
         </div>
       </div>
       <div class="small-12 column">
         <div class="form-floating-label">
-          <input type="text" id="statut" name="statut">
+          <input type="text" id="statut" name="statut" value="{{rows['statut']}}">
           <label for="statut">statut</label>
         </div>
       </div>
       <div class="small-12 column">
         <div class="form-floating-label">
-          <textarea name="texte" id="texte" rows="5" placeholder=""></textarea>
+          <textarea name="texte" id="texte" rows="5" placeholder="">{{rows['texte']}}</textarea>
           <label for="textarea">Texte</label>
         </div>
       </div>
     </div>
     <input class="button expanded" type="submit" value="Valider">
   </form>
+
   <a href="/tab">
     <input type="button" value="retour"/>
   </a>
