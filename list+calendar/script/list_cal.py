@@ -20,12 +20,6 @@ cursor.execute("""CREATE TABLE IF NOT EXISTS donnees
                    statut  TEXT,
                    texte TEXT)""")
 
-#remplissage table a remove
-i=0
-while i <20:
-    cursor.execute("""INSERT INTO donnees (date_modif,description,statut,texte) VALUES(?,?,?,?)""", ("1999-03-20",'description','statut','texte3'))
-    #possibilité de passer par un dico
-    i=i+1
 
 
 conn.commit() #validation des modifications
@@ -35,7 +29,7 @@ def db_func_select_id(database,id_modif):
     conn = sqlite3.connect(database)
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
-    cursor.execute("""SELECT * FROM donnees WHERE id=? """,(id_modif))
+    cursor.execute("""SELECT * FROM donnees WHERE id=? """,(id_modif,))
     rows=cursor.fetchone()
     conn.close()
     return rows
@@ -55,7 +49,7 @@ def db_func_delete(database,mon_id):
     conn = sqlite3.connect(database)
     cursor = conn.cursor()
     cursor.execute("""
-    DELETE FROM donnees WHERE id=?""",(mon_id))
+    DELETE FROM donnees WHERE id=?""",(mon_id,))
     conn.commit()
     conn.close()
     return 0
@@ -64,19 +58,18 @@ def db_func_add(database,date,description,statut,texte):
     conn = sqlite3.connect(database)
     cursor = conn.cursor()
     cursor.execute("""
-    INSERT INTO donnees (date_modif,description,statut,texte) VALUES(?,?,?,?)""",(date,description,statut,texte))
+    INSERT INTO donnees (date_modif,description,statut,texte) VALUES(?,?,?,?)""",(date,description,statut,texte,))
     conn.commit()
     conn.close()
     return 0
 
-#TODO def db_func_edit(database,description,statut,texte,id_edit):
-#    conn =sqlite3.connect(database)
-#    cursor = conn.cursor()
-#    cursor.execute("""
-#    UPDATE donnees SET date_modif,description,statut,texte) WHERE id=? VALUES(?,?,?,?,?)""",(date,description,statut,texte,id_edit)
-#    conn.commit()
-#    conn.close()
-#    return 0
+def db_func_edit(database,date,description,statut,texte,id_edit):
+    conn =sqlite3.connect(database)
+    cursor = conn.cursor()
+    cursor.execute(''' UPDATE donnees SET date_modif = ?,description = ?,statut = ?,texte = ? WHERE id=? ''',(date,description,statut,texte,id_edit,))
+    conn.commit()
+    conn.close()
+    return 0
 
 
 agenda = Flask(__name__)
@@ -133,18 +126,22 @@ def db_add():
 
 
 
-@agenda.route('/db_remove')
+@agenda.route('/db_remove', methods=['post'])
 def db_remove():
-    mon_id=request.form['mon_id']
+    mon_id=session.pop('id_selected',None)
     db_func_delete(database,mon_id)
     #TODO requete remove + JS
     return redirect(url_for('tab'))
 
 @agenda.route('/db_edit', methods=['post'])
 def db_edit():
-    #TODO db_func_edit(database,)
+    date=request.form['date']
+    description=request.form['description']
+    statut=request.form['statut']
+    texte=request.form['texte']
     mon_id=session.pop('id_selected',None)
-    return mon_id
+    db_func_edit(database,date,description,statut,texte,mon_id)
+    return redirect(url_for('tab'))
 
 @agenda.route('/logout')
 def logout():
