@@ -21,9 +21,9 @@ cursor.execute("""CREATE TABLE IF NOT EXISTS donnees
                    texte TEXT)""")
 
 
-
 conn.commit() #validation des modifications
 conn.close() #fermeture de la connexion a la db
+
 
 def db_func_select_id(database,id_modif):
     conn = sqlite3.connect(database)
@@ -75,13 +75,6 @@ def db_func_edit(database,date,description,statut,texte,id_edit):
 agenda = Flask(__name__)
 
 agenda.secret_key = secret_key
-
-
-@agenda.route("/")
-def index():
-    if 'username' in session:
-        return render_template ('index.html')
-    return redirect(url_for('connexion'))
 
 @agenda.route("/connexion")
 def connexion():
@@ -147,18 +140,6 @@ def db_edit():
 def logout():
     session.pop('username', None)
     return redirect(url_for('connexion'))
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 #FOR TESTING
